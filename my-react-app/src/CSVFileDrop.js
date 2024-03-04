@@ -37,7 +37,7 @@ const CSVFileDrop = () => {
       formData.append("csvFile", file);
 
       // Make HTTP POST request to server
-      const response = await axios.post("http://localhost:3000/upload", formData);
+      const response = await axios.post('http://ec2-3-1-100-195.ap-southeast-1.compute.amazonaws.com:3000/upload', formData)
       console.log(response.data);
       setResponse(response.data);
     } catch (error) {
@@ -51,6 +51,7 @@ const CSVFileDrop = () => {
       {csvData ? (
         <div>
           <p>CSV file parsed</p>
+          <pre>{JSON.stringify(response, null, 2)}</pre>
         </div>
       ) : (
         <p>Select a CSV file to upload</p>
