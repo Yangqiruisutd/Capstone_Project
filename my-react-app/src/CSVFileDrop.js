@@ -78,14 +78,7 @@ const CSVFileDrop = () => {
       onDragOver={handleDragOver}
     >
       {csvData ? (
-<<<<<<< HEAD
-        <div>
-          <p>CSV file parsed</p>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
-=======
         <p>CSV file uploaded: {csvData.name}</p>
->>>>>>> 489b23b92a8342dd63c8b4c9044116a05520f25a
       ) : (
         <p>
           Drag & drop a CSV file here, or click{" "}
