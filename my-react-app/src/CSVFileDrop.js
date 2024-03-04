@@ -77,24 +77,19 @@ const CSVFileDrop = () => {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      {csvData ? (
-        <p>CSV file uploaded: {csvData.name}</p>
-      ) : (
+      
         <p>
-          Drag & drop a CSV file here, or click{" "}
+          Drag & drop a CSV file here
           <div>
-            <input type="file" accept=".csv" onChange={handleDrop} />
+            
             {csvData ? (
               <div>
                 <p>CSV file parsed</p>
               </div>
-            ) : (
-              <p>Select a CSV file to upload</p>
+            ) : (<div/>
             )}
-          </div>{" "}
-          to select
+            </div>
         </p>
-      )}
     </div>
   );
 };
