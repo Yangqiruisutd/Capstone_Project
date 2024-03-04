@@ -19,6 +19,20 @@ const CSVFileDrop = () => {
       alert("Please select a CSV file.");
     }
   };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file && file.name.endsWith(".csv")) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target.result;
+        // Parse CSV data
+        const parsedData = parseCSV(result);
+        setCsvData(parsedData);
+      };
+      reader.readAsText(file);
+    }
+  };
 
   const parseCSV = (csvString) => {
     const rows = csvString.split("\n");
@@ -45,18 +59,57 @@ const CSVFileDrop = () => {
     }
   };
 
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
   return (
-    <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
+    <div
+      style={{
+        width: "300px",
+        height: "200px",
+        border: "2px dashed #ccc",
+        borderRadius: "5px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+      }}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+    >
       {csvData ? (
-        <div>
-          <p>CSV file parsed</p>
-        </div>
+        <p>CSV file uploaded: {csvData.name}</p>
       ) : (
-        <p>Select a CSV file to upload</p>
+        <p>
+          Drag & drop a CSV file here, or click{" "}
+          <div>
+            <input type="file" accept=".csv" onChange={handleDrop} />
+            {csvData ? (
+              <div>
+                <p>CSV file parsed</p>
+              </div>
+            ) : (
+              <p>Select a CSV file to upload</p>
+            )}
+          </div>{" "}
+          to select
+        </p>
       )}
     </div>
   );
 };
+// <div>
+
+//   <input type="file" accept=".csv" onChange={handleDrop} />
+//   {csvData ? (
+//     <div>
+//       <p>CSV file parsed</p>
+//     </div>
+//   ) : (
+//     <p>Select a CSV file to upload</p>
+//   )}
+// </div>
+// );
+// };
 
 export default CSVFileDrop;
